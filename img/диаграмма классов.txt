@@ -1,0 +1,132 @@
+@startuml
+class User {
+ -m_login QString;
+ -m_password QString;
+ -m_status Status;
+  +setLogin;
+ +setPassword;
+ +setStatus;
++getListStatus;
+
+}
+
+class Plane {
+ -m_number Qstring;
+ -m_departure Qstring;
+ -m_arrival Qstring;
+ -m_departure_time Qstring;
+ -m_arrival_time Qstring;
+ -m_status Qstring;
+ +setData;
+ +setNumber;
+ +setDeparture;
+ +setArrival;
+ +Departure_time;
+ +setArrival_time;
+ +setStatus
+}
+
+class AddRace {
+ -m_startNumberPlane QString;
+ -m_Plane Plane;
+ -m_listPlanes QList<Plane>;
+ +AddRace;
+
+}
+
+class AddUser {
+ -m_user User;
+ +AddUser User;
+ +isLoginExists;
+
+}
+
+class InfoUser {
+ -user User;
+ +InfoUser;
+ 
+}
+class ControlRaces {
+ -m_listPlanes QList<Plane>;
+ +ControlRaces;
++on_buttonAddRace_clicked;
++on_buttonEditRace_clicked;
++on_buttonDeleteRace_clicked;
++on_lineFind_textChanged;
+}
+
+class ControlUsers {
+ -m_listUsers QList<User>
+ +ControlUsers;
+ +on_buttonDeleteUser_clicked;
+ +on_buttonAddUser_clicked;
+ +on_lineFind_textChanged;
+}
+class SignIn {
+ -checkUser User;
+ +SignIn;
+ +openRegistration;
+ +succesfulEntry;
+ +on_buttonEntry_clicked;
+ 
+}
+class SignUp {
+ -m_typeReg TypeRegistration;
+ -isLoginExists;
+ +SignUp;
+ +openAuthorization;
+ +on_buttonCreate_clicked;
+ 
+}
+class MenuCashier {
+ -MenuCashier explicit;
+ +on_pushButton_clicked;
+ +editedRace;
+ 
+}
+class MenuAdmin {
+ -MenuAdmin explicit;
+ +on_buttonControlUsers_clicked;
+ +on_buttonControlRaces_clicked;
+ 
+}
+class WorkWidget {
+ -m_user User;
+ -m_infoDialog InfoUser;
+ -plane Plane;
+ -listPlanes QList<Plane>;
+ +addRace;
+ +editRace;
+ +deleteRace;
+ +on_infoUser_clicked;
+ +on_menuAdmin_clicked;
+ +menuCashier;
+ +on_lineFind_textChanged;
+ +changeUser;
+}
+class MainWindow {
+ -m_currentWidget QWidget;
+ +slotOpenAuthorization;
+ +slotOpenRegistration;
+ +slotOpenWorkWidget;
+}
+
+MainWindow --|> SignIn : Авторизация
+SignIn --|> SignUp : Регистрация
+SignUp --|> SignIn : Авторизация
+WorkWidget <|-- SignIn : Переход в главное окно программы
+WorkWidget --|> InfoUser : Просмотр информации о пользователе
+WorkWidget --|> MenuAdmin : Переход в меню Администратора
+WorkWidget --|> MenuCashier : Переход в меню диспетчера
+MenuCashier --|> ControlRaces : Переход в окно управления рейсами
+MenuAdmin --|> ControlRaces : Переход в окно управления рейсами
+MenuAdmin --|> ControlUsers : Переход в меню управления пользователя
+AddUser --|> ControlUsers : Добавить пользователя
+AddUser --|> ControlUsers : Удалить пользователя
+AddRace --|> ControlRaces : Добавить пользователя
+AddRace --|> ControlRaces : Редактировать пользователя
+AddRace --|> ControlRaces : Удалить пользователя
+Plane--|> AddRace
+User--|> AddUser
+User --|> InfoUser
+@enduml
