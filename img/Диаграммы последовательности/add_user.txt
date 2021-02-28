@@ -1,0 +1,21 @@
+@startuml
+actor "Администратор" as pols
+
+entity "База данных пользователей" as bd_users
+entity "Проверка корректности данных" as korrect
+
+boundary "Меню администратора" as menu_admin
+boundary "Окно управления пользователями" as control_users
+boundary "Окно добавления пользователя" as add_user
+ 
+ 
+pols -> menu_admin : Переход в меню администратора
+menu_admin -> control_users : Переход в окно управления пользователями
+activate control_users
+control_users -> add_user : Указать данные нового пользователя(логин, пароль, статус)
+activate add_user
+add_user -> korrect : Проверка корректности данных
+activate korrect
+korrect -> bd_users : Добавить пользователя в базу данных
+korrect -> add_user : Некорректные данные
+@enduml

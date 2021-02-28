@@ -1,0 +1,19 @@
+@startuml
+actor "Администратор" as pols
+
+entity "База данных пользователей" as bd_users
+entity "Удаление пользователя" as del_user
+
+
+boundary "Меню администратора" as menu_admin
+boundary "Окно управления пользователями" as control_users
+
+ 
+ 
+pols -> menu_admin : Переход в меню администратора
+menu_admin -> control_users : Переход в окно управления пользователями
+activate control_users
+control_users -> del_user : Выбор пользователя и удаление
+activate del_user
+del_user -> bd_users : Успешное удаление пользователя
+@enduml

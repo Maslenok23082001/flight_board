@@ -1,0 +1,15 @@
+@startuml
+actor Пассажир
+
+boundary "Главное окно" as main_window
+boundary "Интерфейс фильтрации" as filtr_v
+
+entity "База данных рейсов" as db_races
+
+Пассажир -> main_window
+main_window -> filtr_v : Запись в поле для фильтрации
+filtr_v -> db_races : Ввод символов в поле для фильтрации
+db_races -> main_window : При вводе параметра поиска не найдено рейсов
+filtr_v -> db_races : Ввод символов в поле для фильтрации
+db_races -> main_window : Рейс найден и отображается в таблице
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+actor "Администратор, диспетчер" as pols
+
+entity "База данных рейсов" as bd_races
+entity "Проверка корректности данных" as korrect
+
+
+boundary "Меню администратора(меню диспетчера)" as menu_admin
+boundary "Окно управления рейсами" as control_races
+boundary "Окно редактирования рейса" as red_race
+
+ 
+ 
+pols -> menu_admin : Переход в меню администратора
+menu_admin -> control_races : Переход в окно управления рейсами
+activate control_races
+control_races -> red_race : Ввод данных для редактирования рейса
+activate red_race
+red_race -> korrect : Проверка введённых данных
+activate korrect
+korrect -> red_race : Некорректные данные
+korrect -> bd_races : Успешное редактирование рейса
+@enduml
